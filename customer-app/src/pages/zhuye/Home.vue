@@ -1,6 +1,6 @@
 <template>
-  <div id="app">
-    <router-view></router-view>
+  <div class="home">
+      家页面
   </div>
 </template>
 

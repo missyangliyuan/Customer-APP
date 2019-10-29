@@ -2,6 +2,10 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 Vue.use(Vuex)
+import login from './login'
+import mine from './mine'
+import address from './address'
+import addressadd from './address-add'
 
 export default new Vuex.Store({
   state: {
@@ -11,5 +15,9 @@ export default new Vuex.Store({
   actions: {
   },
   modules: {
+    login,
+    mine,
+    address,
+    addressadd,
   }
 })
