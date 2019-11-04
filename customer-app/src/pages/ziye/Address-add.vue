@@ -1,7 +1,7 @@
 <template>
   <div class="addressadd">
       <van-nav-bar
-        title="新增地址信息"
+        :title="title"
         left-text="返回"
         left-arrow
         border
@@ -9,7 +9,6 @@
       />
       <van-address-edit
         :area-list="areaList"
-        show-postal
         show-delete
         show-set-default
         show-search-result
@@ -23,7 +22,8 @@
 </template>
 
 <script>
-import {mapState,mapMutations} from 'vuex'
+import {mapState,mapMutations, mapActions} from 'vuex';
+import { Notify } from 'vant';
 export default {
   data(){
     return {
@@ -31,32 +31,51 @@ export default {
     }
   },
   created(){
-    console.log(this.areaList,'====')
     this.shengshiqu();
+    this.getinfo(this.token);
   },
   computed:{
-    ...mapState('addressadd',['areaList'])
+    ...mapState('addressadd',['areaList','title']),
+    ...mapState('login',['token','info'])
   },
   methods:{
     ...mapMutations('addressadd',['shengshiqu']),
+    ...mapActions('addressadd',['addAddress']),
+    ...mapActions('login',{
+      'getinfo':'info'
+    }),
     onClickLeft(){
-      this.$router.push('/address')
+      this.$router.go(-1);
     },
-    onSave() {
-      Toast('save');
+    onSave(val) {
+      console.log(val);
+      let data = {
+        province:val.province,
+        city:val.city,
+        area:val.county,
+        address:val.addressDetail,
+        telephone:val.tel,
+        customerId:this.info.id
+      };
+      console.log(data)
+      this.addAddress(data)
+      .then((response)=>{
+          this.$router.push('/address');
+          Notify({ type: 'success', duration: 1000, message: '新地址添加成功' });
+      })
     },
     onDelete() {
       Toast('delete');
     },
     onChangeDetail(val) {
-      if (val) {
-        this.searchResult = [{
-          name: '黄龙万科中心',
-          address: '杭州市西湖区'
-        }];
-      } else {
-        this.searchResult = [];
-      }
+      // if (val) {
+      //   this.searchResult = [{
+      //     name: '黄龙万科中心',
+      //     address: '杭州市西湖区'
+      //   }];
+      // } else {
+      //   this.searchResult = [];
+      // }
     }
   }
 }

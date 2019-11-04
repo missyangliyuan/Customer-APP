@@ -3,6 +3,7 @@ export default {
     namespaced:true,
     state:{
         areaList:{},
+        title:'新增地址信息'
     },
     mutations:{
         shengshiqu(state,areaList){
@@ -4046,12 +4047,22 @@ export default {
                     820201: '离岛'
                 }
             }
+        },
+        setTitle(state,title){
+            state.title = title;
         }
     },
     getters:{
 
     },
     actions:{
-       
+       async addAddress(context,data){
+            let response = post('/address/saveOrUpdate',data)
+            return response;
+       },
+       async deleteAddress(context,id){
+                let response = get('/address/deleteById?id='+id)
+                return response;
+        }
     }
 }

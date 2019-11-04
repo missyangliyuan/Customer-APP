@@ -11,9 +11,9 @@ export default {
 
     },
     actions:{
-        async Logout(){
-           let response = await post('/user/logout');
-           return response;
-        }
+        // async Logout(){
+        //    let response = await post('/user/logout');
+        //    return response;
+        // }
     }
 }

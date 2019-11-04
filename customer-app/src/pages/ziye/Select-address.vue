@@ -3,6 +3,7 @@
       <van-nav-bar
         title="我的地址"
         left-text="返回"
+        right-text="确定"
         left-arrow
         @click-left="onClickLeft"
         @click-right="onClickRight"
@@ -12,6 +13,7 @@
         :list="address"
         @add="onAdd"
         @edit="onEdit"
+        @select='changeAddress'
         />
   </div>
 </template>
@@ -22,7 +24,8 @@ export default {
     data(){
         return {
             address:[],
-            chosenAddressId: '0',
+            chosenAddressId: '1',
+            realAddress:{},
         }
     },
     created(){
@@ -53,9 +56,20 @@ export default {
             'getInfo':'info'
         }),
         onClickLeft(){
-            this.$router.push('/shouye/mine');
+            this.$router.go(-1);
         },
-        onClickRight(){},
+        onClickRight(){
+            let obj = this.realAddress;
+            this.$router.push({
+                path:'/shouye/order/orderreal',
+                query:{obj},
+            });
+        },
+        changeAddress(item,index){
+            console.log(item);
+            this.realAddress = item;
+            console.log(index);
+        },
         onAdd(){
             this.$router.push('/addressadd');
             this.setTitle('添加地址信息');

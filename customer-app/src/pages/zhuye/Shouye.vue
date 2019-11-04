@@ -12,15 +12,31 @@
 </template>
 
 <script>
+import { mapState , mapActions } from 'vuex';
 export default {
     data(){
         return {
             active: '/home'
         }
     },
+    computed:{
+        ...mapState('login',['token','info']),
+    },
     methods:{
+        ...mapActions('login',{
+            'getInfo':'info',
+            'logout':'logout'
+        }),
         changeHandler(path){
             this.$router.push({path});
+        },
+    },
+    created(){
+        if(this.token){
+            this.getInfo(this.token);
+        } else {
+            this.$toast('身份认证失效，请您重新登录');
+            this.$router.push('/')
         }
     }
 }

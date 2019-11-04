@@ -19,16 +19,9 @@
             label="密码"
             placeholder="请输入密码"
             required
-            @touchstart.native.stop="show = true"
         />
-        <van-number-keyboard
-            v-model="password"
-            :show="show"
-            :maxlength="6"
-            @blur="show = false"
-            />
     </van-cell-group>
-    <van-button style='margin-top:50px;' round type="info" size="large" @click="loginHandler">登录</van-button>
+    <van-button class="login-btn" type="info" size="large" @click="loginHandler">登录</van-button>
   </div>
 </template>
 
@@ -38,7 +31,6 @@ import { Notify } from 'vant';
 export default {
     data(){
         return {
-            show: false,
             username:'',
             password:'',
         }
@@ -74,5 +66,12 @@ export default {
         line-height: 220px;
         text-align: center;
         color: orangered;
+    }
+    .login-btn {
+        box-sizing: border-box;
+        margin-top:20%;
+        margin-left: 5%;
+        width: 90%;
+        border-radius: 4%;
     }
 </style>
