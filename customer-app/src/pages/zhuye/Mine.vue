@@ -48,9 +48,9 @@ export default {
       },
       bagHandler(){
         Toast({
-                message: '亲，该功能还未开放哟！',
-                icon: 'like-o'
-            });
+            message: '亲，该功能还未开放哟！',
+            icon: 'like-o'
+        });
       }
     }
 }

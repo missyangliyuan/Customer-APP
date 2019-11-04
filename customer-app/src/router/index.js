@@ -62,6 +62,14 @@ const routes = [
     component: () => import('../pages/Login.vue')
   },
   {
+    path:'/signup',
+    component: () => import('../pages/SignUp.vue'),
+  },
+  {
+    path:'/searchpassword',
+    component: () => import('../pages/SearchPassword.vue'),
+  },
+  {
     path:'/address',
     component: () => import('../pages/ziye/Address.vue'),
   },

@@ -1,5 +1,6 @@
 import {get,post,post_array,post_json} from '../http/axios'
 import { getToken , setToken , removeToken } from '../utils/auth';
+import { sign } from 'crypto';
 export default {
     namespaced:true,
     state:{
@@ -45,6 +46,16 @@ export default {
             context.commit('refreshToken','');
             context.commit('refreshInfo',{})
 
+        },
+        // 注册账号
+        async signup(context,data){
+            let response = await post('/customer/saveOrUpdate',data);
+            return response;
+        },
+        // 找回密码  1
+        async findAllcustomer(context){
+            let response = await get('/customer/findAll')
+            return response;
         }
     }
 }

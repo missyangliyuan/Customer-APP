@@ -4,7 +4,7 @@
         家政服务登录系统
     </div>
     <van-cell-group>
-            <van-field
+        <van-field
             v-model="username"
             required
             clearable
@@ -21,6 +21,15 @@
             required
         />
     </van-cell-group>
+    <van-row>
+        <van-col offset="2" span="8">
+            <div class="change" @click="toSignUp">没有账号？去注册</div>
+        </van-col>
+        <van-col offset="9" span="5">
+            <div class="change" @click="forgetPasswordHandler">忘记密码</div>
+        </van-col>
+    </van-row>
+
     <van-button class="login-btn" type="info" size="large" @click="loginHandler">登录</van-button>
   </div>
 </template>
@@ -28,6 +37,7 @@
 <script>
 import {mapActions, mapState} from 'vuex';
 import { Notify } from 'vant';
+import { Toast } from 'vant';
 export default {
     data(){
         return {
@@ -52,6 +62,18 @@ export default {
                 this.$router.push('/shouye/home');
                 Notify({ type: 'success', duration: 1000, message: '登录成功' });
             })
+            .catch((response)=>{
+                Toast({
+                    message: '账号或密码错误',
+                    icon: 'warning-o'
+                });
+            })
+        },
+        toSignUp(){
+            this.$router.push('/signup');
+        },
+        forgetPasswordHandler(){
+            this.$router.push('/searchpassword');
         }
     },
 }
@@ -73,5 +95,9 @@ export default {
         margin-left: 5%;
         width: 90%;
         border-radius: 4%;
+    }
+    .change {
+        color: blue;
+        font-size: 12px;
     }
 </style>
