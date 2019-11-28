@@ -94,6 +94,10 @@ export default {
         }
     },
     created(){
+        console.log(this.$route.query,'=====');
+        if(this.$route.query.obj){
+            this.realaddress = this.$route.query.obj;
+        }
         this.getInfo(this.token);
         this.findAddressById(this.info.id)
         .then((response)=>{
@@ -119,11 +123,12 @@ export default {
         },
         changeAddress(){
             this.$router.push("/shouye/order/orderreal/selectaddress");
-           
-            let obj = this.$route.query;
-            this.realaddress = obj.obj;
-            console.log(this.realaddress)
-            console.log(this.$route.query)
+            // let obj = this.$route.query;
+            // console.log(this.realaddress,'-----');
+            // this.realaddress = obj.obj;
+            // console.log(obj)
+            // console.log(this.realaddress)
+            // console.log(this.$route.query)
         },
         momentHandler(){
             let now = new Date();

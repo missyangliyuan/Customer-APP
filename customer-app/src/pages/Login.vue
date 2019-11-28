@@ -56,6 +56,7 @@ export default {
                 password: this.password,
                 type: 'customer'
             };
+            console.log(canshu);
             this.LoginCustomer(canshu)
             .then((response)=>{
                 console.log(response.data)
